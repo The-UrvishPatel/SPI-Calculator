@@ -6,106 +6,131 @@
     <title>SPI and PPI Calculator</title>
     <style>
         body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-    }
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-size: 1.6vw; /* Set a base font size using viewport units */
+        }
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+        .container {
+            max-width: 800px;
+            margin: 5vw auto; /* Use viewport units for margin */
+            padding: 5vw;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 2vw rgba(0, 0, 0, 0.1); /* Use viewport units for box shadow */
+        }
 
-    h2 {
-        text-align: center;
-        color: #333;
-    }
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 2em; /* Adjust as needed */
+        }
 
-    nav {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+        nav {
+            text-align: center;
+            margin-bottom: 5vw;
+        }
 
-    nav a {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #4caf50;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 4px;
-        margin-right: 10px;
-        font-size: 16px;
-        cursor: pointer;
-    }
+        nav a {
+            display: inline-block;
+            padding: 1.5vw 3vw; /* Adjust padding using viewport units */
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 2vw; /* Adjust margin using viewport units */
+            font-size: 1.5vw; /* Adjust font size using viewport units */
+            cursor: pointer;
+        }
 
-    nav a:hover {
-        background-color: #45a049;
-    }
+        nav a:hover {
+            background-color: #45a049;
+        }
 
-    /* Highlight the selected tab */
-    nav a.active {
-        background-color: #2e9b00;
-    }
+        /* Highlight the selected tab */
+        nav a.active {
+            background-color: #367d3a;
+        }
 
-    label {
-        display: block;
-        margin-bottom: 8px;
-    }
+        label {
+            display: block;
+            margin-bottom: 1vw; /* Adjust margin using viewport units */
+        }
 
-    input, select {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-    }
+        input, select {
+            width: 100%;
+            padding: 1vw;
+            margin-bottom: 2vw; /* Adjust margin using viewport units */
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1.5vw; /* Adjust font size using viewport units */
+        }
 
-    table {
-        width: 100%;
-        margin-top: 20px;
-        border-collapse: collapse;
-    }
+        .select-width {
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 12px;
-        text-align: left;
-    }
+            min-width: 60px;
+        }
 
-    button {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-    }
+        table {
+            width: 100%;
+            margin-top: 5vw;
+            border-collapse: collapse;
+        }
 
-    button:hover {
-        background-color: #45a049;
-    }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 1.2vw;
+            text-align: left;
+        }
 
-    #spiResult, #ppiResult {
-        margin-top: 20px;
-        text-align: center;
-        font-size: 18px;
-    }
+        button {
+            display: block;
+            width: 100%;
+            padding: 1.5vw;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.5vw; /* Adjust font size using viewport units */
+        }
 
-    /* Hide PPI elements by default */
-    #ppiSection {
-        display: none;
-    }
+        button:hover {
+            background-color: #45a049;
+        }
 
+        #spiResult, #ppiResult {
+            margin-top: 5vw;
+            text-align: center;
+            font-size: 4vw; /* Adjust font size using viewport units */
+        }
+
+        /* Hide PPI elements by default */
+        #ppiSection {
+            display: none;
+        }
+
+        /* Responsive font size adjustments */
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 4vw;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            nav a, input, select, th, td, button {
+                font-size: 3vw;
+            }
+
+            #spiResult, #ppiResult {
+                font-size: 4vw;
+            }
+        }
     </style>
 </head>
 <body>
@@ -115,8 +140,8 @@
 
         <!-- Navigation bar with two tabs -->
         <nav>
-            <a href="#" onclick="switchTab('spiSection')" class="active" data-tab="spiSection">SPI Calculator</a>
-            <a href="#" onclick="switchTab('ppiSection')" data-tab="ppiSection">PPI Calculator</a>
+            <a onclick="switchTab('spiSection')" class="active" data-tab="spiSection">SPI Calculator</a>
+            <a onclick="switchTab('ppiSection')" data-tab="ppiSection">PPI Calculator</a>
         </nav>
 
         <!-- SPI Calculator Section -->
@@ -188,8 +213,7 @@
                 const cell3 = row.insertCell(2);
 
                 cell1.innerHTML = `<input type="text" placeholder="Subject Name(optional)" id="subjectName${i}">`;
-                cell2.innerHTML = `<input type="number" placeholder="Credit" id="credit${i}" required>`;
-                cell3.innerHTML = `<select id="grade${i}" required>
+                cell2.innerHTML = `<select id="grade${i}" class="select-width" required>
                                     <option value="10">A+</option>
                                     <option value="9">A</option>
                                     <option value="8">B+</option>
@@ -199,6 +223,7 @@
                                     <option value="0">IF</option>
                                     <option value="0">FF</option>
                                 </select>`;
+                cell3.innerHTML = `<input type="number" placeholder="Credit" id="credit${i}" required>`;
             }
         }
 
@@ -233,7 +258,7 @@
                 const cell2 = row.insertCell(1);
                 const cell3 = row.insertCell(2);
 
-                cell1.innerHTML = "Sem" + i;
+                cell1.innerHTML = `<div class="select-width"> Sem ${i} </div>`;
                 cell2.innerHTML = `<input type="number" placeholder="SPI" id="spi${i}" required>`;
                 cell3.innerHTML = `<input type="number" placeholder="Total Credits" id="tc${i}" required>`;
             }
