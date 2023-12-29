@@ -3,99 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPI Calculator</title>
+    <title>SPI and PPI Calculator</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        h2 {
-            text-align: center;
-            color: #333;
-        }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
+    nav {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
+    nav a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-right: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
 
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
+    nav a:hover {
+        background-color: #45a049;
+    }
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
+    /* Highlight the selected tab */
+    nav a.active {
+        background-color: #2e9b00;
+    }
 
-        button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
 
-        button:hover {
-            background-color: #45a049;
-        }
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
 
-        #spiResult {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 18px;
-        }
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    #spiResult, #ppiResult {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    /* Hide PPI elements by default */
+    #ppiSection {
+        display: none;
+    }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>SPI Calculator</h2>
+        <h2>SPI and PPI Calculator</h2>
 
-        <label for="numSubjects">Number of Subjects:</label>
-        <input type="number" id="numSubjects">
+        <!-- Navigation bar with two tabs -->
+        <nav>
+            <a href="#" onclick="switchTab('spiSection')" class="active" data-tab="spiSection">SPI Calculator</a>
+            <a href="#" onclick="switchTab('ppiSection')" data-tab="ppiSection">PPI Calculator</a>
+        </nav>
 
-        <button onclick="generateTable()">Done</button>
+        <!-- SPI Calculator Section -->
+        <div id="spiSection">
+            <label for="numSubjects">Number of Subjects:</label>
+            <input type="number" id="numSubjects">
 
-        <table id="subjectTable">
-            <!-- Table will be dynamically generated here -->
-        </table>
+            <button onclick="generateTable()">Done</button>
 
-        <button onclick="calculateSPI()">Get SPI</button>
-        <div id="spiResult"></div>
+            <table id="subjectTable">
+                <!-- Table will be dynamically generated here -->
+            </table>
+
+            <button onclick="calculateSPI()">Get SPI</button>
+            <div id="spiResult"></div>
+        </div>
+
+        <!-- PPI Calculator Section -->
+        <div id="ppiSection">
+            <label for="numSemesters">Number of Semesters:</label>
+            <input type="number" id="numSemesters">
+
+            <button onclick="generateSemesterTable()">Done</button>
+
+            <table id="semesterTable">
+                <!-- Table will be dynamically generated here -->
+            </table>
+
+            <button onclick="calculatePPI()">Get PPI</button>
+            <div id="ppiResult"></div>
+        </div>
     </div>
 
 
     <script>
+
+        function switchTab(tab) {
+            // Hide all sections by default
+            document.getElementById('spiSection').style.display = 'none';
+            document.getElementById('ppiSection').style.display = 'none';
+
+            // Remove "active" class from all tabs
+            const tabs = document.querySelectorAll('nav a');
+            tabs.forEach(tabElement => tabElement.classList.remove('active'));
+
+            // Show the selected section
+            document.getElementById(tab).style.display = 'block';
+
+            // Add "active" class to the selected tab
+            const selectedTab = document.querySelector(`nav a[data-tab="${tab}"]`);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+        }
+
+
+
         function generateTable() {
             const numSubjects = document.getElementById("numSubjects").value;
             const table = document.getElementById("subjectTable");
@@ -140,6 +218,45 @@
             const spiResult = document.getElementById("spiResult");
             spiResult.innerHTML = `<p>SPI: ${spi.toFixed(2)}</p>`;
         }
+
+
+        function generateSemesterTable() {
+            const numSemesters = document.getElementById("numSemesters").value;
+            const table = document.getElementById("semesterTable");
+
+            // Clear previous table rows
+            table.innerHTML = "";
+
+            for (let i = 1; i <= numSemesters; i++) {
+                const row = table.insertRow(-1);
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+
+                cell1.innerHTML = "Sem" + i;
+                cell2.innerHTML = `<input type="number" placeholder="SPI" id="spi${i}" required>`;
+                cell3.innerHTML = `<input type="number" placeholder="Total Credits" id="tc${i}" required>`;
+            }
+        }
+
+        function calculatePPI() {
+            const numSemesters = document.getElementById("numSemesters").value;
+            let totalSPICredits = 0;
+            let totalCredits = 0;
+
+            for (let i = 1; i <= numSemesters; i++) {
+                const spi = parseFloat(document.getElementById(`spi${i}`).value);
+                const totalCreditsSemester = parseFloat(document.getElementById(`tc${i}`).value);
+                totalSPICredits += spi * totalCreditsSemester;
+                totalCredits += totalCreditsSemester;
+            }
+
+            const ppi = totalSPICredits / totalCredits;
+            const ppiResult = document.getElementById("ppiResult");
+            ppiResult.innerHTML = `<p>PPI: ${ppi.toFixed(2)}</p>`;
+        }
+
+
     </script>
 </body>
 </html>
