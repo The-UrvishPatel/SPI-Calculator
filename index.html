@@ -147,9 +147,7 @@
         <!-- SPI Calculator Section -->
         <div id="spiSection">
             <label for="numSubjects">Number of Subjects:</label>
-            <input type="number" id="numSubjects">
-
-            <button onclick="generateTable()">Done</button>
+            <input type="number" id="numSubjects" oninput="generateTable()">
 
             <table id="subjectTable">
                 <!-- Table will be dynamically generated here -->
@@ -162,9 +160,7 @@
         <!-- PPI Calculator Section -->
         <div id="ppiSection">
             <label for="numSemesters">Number of Semesters:</label>
-            <input type="number" id="numSemesters">
-
-            <button onclick="generateSemesterTable()">Done</button>
+            <input type="number" id="numSemesters" oninput="generateSemesterTable()">
 
             <table id="semesterTable">
                 <!-- Table will be dynamically generated here -->
@@ -232,15 +228,29 @@
             let totalCredits = 0;
             let totalGradeCredits = 0;
 
+            let isFail = false;
+
             for (let i = 1; i <= numSubjects; i++) {
                 const credit = parseFloat(document.getElementById(`credit${i}`).value);
                 const grade = parseFloat(document.getElementById(`grade${i}`).value);
+
+                
                 totalCredits += credit;
                 totalGradeCredits += credit * grade;
+                
+                if(grade === 0)
+                {
+                    isFail = true;
+                    break;
+                }
             }
 
             const spi = totalGradeCredits / totalCredits;
             const spiResult = document.getElementById("spiResult");
+
+            if(isFail)
+            spiResult.innerHTML = `<p>SPI: Fail</p>`;
+            else
             spiResult.innerHTML = `<p>SPI: ${spi.toFixed(2)}</p>`;
         }
 
