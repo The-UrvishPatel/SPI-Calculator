@@ -251,7 +251,7 @@
             if(isFail)
             spiResult.innerHTML = `<p>SPI: Fail</p>`;
             else
-            spiResult.innerHTML = `<p>SPI: ${spi.toFixed(2)}</p>`;
+            spiResult.innerHTML = `<p>SPI: ${spi.toFixed(5)}</p>`;
         }
 
 
@@ -288,7 +288,7 @@
 
             const ppi = totalSPICredits / totalCredits;
             const ppiResult = document.getElementById("ppiResult");
-            ppiResult.innerHTML = `<p>PPI: ${ppi.toFixed(2)}</p>`;
+            ppiResult.innerHTML = `<p>PPI: ${ppi.toFixed(5)}</p>`;
         }
 
 
